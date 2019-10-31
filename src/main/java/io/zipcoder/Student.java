@@ -46,5 +46,32 @@ public class Student {
         testScores.add(examScore);
         return null;
     }
+    public Double setExamScore(int examNumber, double newScore){
+        for (int i = 0; i < testScores.size(); i++){
+         if (i == examNumber) {
+             testScores.set(i, newScore);
+         }
+            }
+        return null;
+
+    }public Double getAverageExamScore(){
+        Double sum = 0.0;
+        int counter = 0;
+        for (Double x : testScores) {
+            sum += x;
+        }
+        return sum / testScores.size();
+    }
+    public String toString(){
+        System.out.println(firstName +" "+ lastName+" ");
+        System.out.println("Exam Scores:");
+        for (Double x : testScores){
+            Double test =x;
+            System.out.println(test);
+
+        }
+        return "";
+    }
+
 
 }
