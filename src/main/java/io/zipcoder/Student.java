@@ -1,77 +1,81 @@
 package io.zipcoder;
-
-
-
 import java.util.ArrayList;
-import java.util.Iterator;
 
-public class Student {
-    public String firstName;
-    public String lastName;
-    public ArrayList<Double> testScores = new ArrayList<>();
+public class Student implements Comparable<Student>{
+    private String firstName;
+    private String lastName;
+    private ArrayList<Double> examScores;// = new ArrayList<>();
 
-    public Student (String firstName, String lastName, Double[] testScores){
+
+    public Student(String firstName, String lastName, ArrayList<Double> examScores) {
         this.firstName = firstName;
         this.lastName = lastName;
-        for (Double i:testScores) {
-            this.testScores.add(i);
-        }
-     }
+        this.examScores = examScores;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public String getFirstName(){
-        return firstName;
+    public Integer getNumberOfExamsTaken()  {
+        return examScores.size();
     }
-    public String getLastName(){
-        return lastName;
-    }
-    public ArrayList<Double> getNumberOfExamsTaken(){
-        return testScores;
-    }
-    String getExamScores(){
-        for (Double index:testScores) {
-            System.out.println(index);
+
+
+    public String getExamScores() {
+        String result = "";
+        Integer i = 1;
+        for (Double d : examScores
+        ) {
+            result = "\tExam + "+ i +" + -> " + d + "\n";
+            i++;
         }
-
-        return "";
+        return result;
     }
-    public Double addExamScore(Double examScore){
-
-        testScores.add(examScore);
-        return null;
+    public void addExamScore(Double score) {
+        this.examScores.add(score);
     }
-    public Double setExamScore(int examNumber, double newScore){
-        for (int i = 0; i < testScores.size(); i++){
-         if (i == examNumber) {
-             testScores.set(i, newScore);
-         }
-            }
-        return null;
-
-    }public Double getAverageExamScore(){
+    public void setExamScore(int examNumber, double newScore) {
+        this.examScores.set(examNumber,newScore);
+    }
+    public Double getAverageExamScore() {
         Double sum = 0.0;
-        int counter = 0;
-        for (Double x : testScores) {
-            sum += x;
+        for (Double score : examScores
+        ) {
+            sum += score;
         }
-        return sum / testScores.size();
-    }
-    public String toString(){
-        System.out.println(firstName +" "+ lastName+" ");
-        System.out.println("Exam Scores:");
-        for (Double x : testScores){
-            Double test =x;
-            System.out.println(test);
-
-        }
-        return "";
+        return sum/examScores.size();
     }
 
+    @Override
+    public String toString() {
+        return "Student Name: " + firstName +" "+ lastName +
+                "\nAverage Score: " + getAverageExamScore() + "\n " +
+                getExamScores();
 
+    }
+
+    @Override
+    public int compareTo(Student s) {
+        if (this.getAverageExamScore() > s.getAverageExamScore()) {
+            return 1;
+        }
+        else if (this.getAverageExamScore() < s.getAverageExamScore())    {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    }
 }

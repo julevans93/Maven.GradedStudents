@@ -3,77 +3,53 @@ package io.zipcoder;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 public class StudentTest {
+    ArrayList<Double> arr = new ArrayList<>(10);
+
     @Test
-    public void getExamScoresTest() {
-        // : Given
-        String firstName = "Leon";
-        String lastName = "Hunter";
-        Double[] testScores = { 100.0, 95.0, 123.0, 96.0 };
-        Student student = new Student(firstName, lastName, testScores);
+    public void constructorWith3Params() {
 
-        // When
-        String output = student.getExamScores();
-
-        // Then
-        System.out.println(output);
+        Student student = new Student("A","B", this.arr);
+        String expected = "A";
+        String actual = student.getFirstName();
+        Assert.assertEquals(expected,actual);
+        arr.clear();
     }
+
     @Test
-    public void addExamScoreTest(){
-        // : Given
-        String firstName = "Leon";
-        String lastName = "Hunter";
-        Double[] examScores = { };
-        Student student = new Student(firstName, lastName, examScores);
-
-// When
-        student.addExamScore(100.0);
-        String output = student.getExamScores();
-
-// Then
-        System.out.println(output);
+    public void getExamScoreTest() {
+        arr.add(100.0);
+        Student student = new Student("A","B", this.arr);
+        String expected = "\tExam + "+ arr.size() +" + -> " + 100.0 + "\n";
+        String actual  = student.getExamScores();
+        Assert.assertEquals(expected,actual);
+        arr.clear();
     }
+
     @Test
-    public void setExamScoreTest(){
-        // : Given
-        String firstName = "Leon";
-        String lastName = "Hunter";
-        Double[] examScores = { 150.0 };
-        Student student = new Student(firstName, lastName, examScores);
-
-// When
-        student.setExamScore(1, 150.0);
-        String output = student.getExamScores();
-
-// Then
-        System.out.println(output);
+    public void addExamScoreTest() {
+        arr.add(100.0);
+        Student student = new Student("A","B", this.arr);
+        Double expected = 100.00;
+        student.addExamScore(100.00);
+        Double actual = student.getAverageExamScore();
+        Assert.assertEquals(expected,actual);
+        arr.clear();
     }
+
     @Test
-    public void getAverageExamScoreTest(){
-    // : Given
-    String firstName = "Leon";
-    String lastName = "Hunter";
-    Double[] examScores = { 100.0, 150.0, 250.0, 0.0 };
-    Student student = new Student(firstName, lastName, examScores);
-
-    // When
-    double output = student.getAverageExamScore();
-
-    // Then
-		System.out.println(output);
+    public void setExamScoreTest() {
+        arr.add(100.0);
+        Student student = new Student("A","B", this.arr);
+        Double expected = 100.00;
+        Double actual = student.getAverageExamScore();
+        Assert.assertEquals(expected,actual);
+        arr.clear();
     }
+
     @Test
-    public void toStringTest(){
-    // : Given
-    String firstName = "Leon";
-    String lastName = "Hunter";
-    Double[] examScores = { 100.0, 150.0, 250.0, 0.0 };
-    Student student = new Student(firstName, lastName, examScores);
-
-    // When
-    String output = student.toString();
-
-    // Then
-		System.out.println(output);
+    public void name() {
     }
 }
